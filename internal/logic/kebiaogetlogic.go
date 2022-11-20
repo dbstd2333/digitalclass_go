@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"strconv"
 	"time"
 
 	"cloudclass_go/internal/svc"
@@ -17,6 +18,8 @@ type KebiaogetLogic struct {
 	svcCtx *svc.ServiceContext
 }
 type KebiaoJson struct {
+	CleanG    string `json:"cleang"`
+	Zhiri     string `json:"zhiri"`
 	Class     int    `json:"class"`
 	Weekly    string `json:"weekly"`
 	Lession1  string `json:"lession1"`
@@ -59,11 +62,11 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 
 	if req.Weekly == 0 {
 
-		qkey := "class" + string(rune(req.Class)) + "subject"
+		qkey := "class" + strconv.Itoa(int(req.Class)) + "subject"
 		rsbj, err := l.svcCtx.Redis.Get(qkey).Result() //查redis
 		sbj := KebiaoJson{}
 		errj := json.Unmarshal([]byte(rsbj), &sbj)
-
+		
 		if errj != nil || err != nil { //如果redis查不到数据或json无法对应，则查mysql后回填redis，return
 			print(errj.Error())
 			print(err.Error())
@@ -73,7 +76,6 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 				Time: time.Now(),
 			}
 			l.svcCtx.Mysql.Create(&logs)
-
 			var sbj1 svc.Subject //初始化查询结构体
 			var sbj2 svc.Subject
 			var sbj3 svc.Subject
@@ -87,6 +89,7 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 			var sbj11 svc.Subject
 			var sbj12 svc.Subject
 			var sbj13 svc.Subject
+			var std svc.Userinf
 			//开始查mysql
 			l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 1, int(time.Now().Weekday())).First(&sbj1)
 			l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 2, int(time.Now().Weekday())).First(&sbj2)
@@ -101,7 +104,14 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 			l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 11, int(time.Now().Weekday())).First(&sbj11)
 			l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 12, int(time.Now().Weekday())).First(&sbj12)
 			l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 13, int(time.Now().Weekday())).First(&sbj13)
-			mkebiao := &KebiaoJson{ //创建map，统一写入，避免多次写redis
+			rcid, errcid := l.svcCtx.Redis.Get("class" + strconv.Itoa(int(req.Class)) + "tomorrowdaycid").Result()
+			if errcid != nil {
+				print("errcid " + errcid.Error())
+			}
+			l.svcCtx.Mysql.Where("class = ? AND cid = ?", req.Class, rcid).First(&std)
+			mkebiao := &KebiaoJson{ //写入结构体转json
+				CleanG:    "",
+				Zhiri:     std.Name,
 				Class:     int(req.Class),
 				Weekly:    time.Now().Weekday().String(),
 				Lession1:  sbj1.Sbjname,
@@ -132,7 +142,7 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 				Src13:     sbj13.Src,
 			}
 			rdkebiao, _ := json.Marshal(mkebiao) //map转json
-			skey := "class" + string(rune(req.Class)) + "subject"
+			skey := "class" + strconv.Itoa(int(req.Class)) + "subject"
 			rwerr := l.svcCtx.Redis.Set(skey, rdkebiao, 28800*time.Second).Err() //mysql数据写入redis
 			if rwerr != nil {
 				print(rwerr.Error())
@@ -143,7 +153,7 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 				}
 				l.svcCtx.Mysql.Create(&logs)
 			}
-			return &types.Kebiaores{
+			return &types.Kebiaores{ //返回mysql数据
 				Weekly:    time.Now().Weekday().String(),
 				Lession1:  sbj1.Sbjname,
 				Src1:      sbj1.Src,
@@ -173,7 +183,7 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 				Src13:     sbj13.Src,
 			}, nil
 		} else {
-			return &types.Kebiaores{
+			return &types.Kebiaores{ //有缓存返回缓存
 				Weekly:    sbj.Weekly,
 				Lession1:  sbj.Lession1,
 				Src1:      sbj.Src1,
@@ -204,6 +214,72 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 			}, nil
 		}
 		var sbj1 svc.Subject //初始化查询结构体
+		var sbj2 svc.Subject
+		var sbj3 svc.Subject
+		var sbj4 svc.Subject
+		var sbj5 svc.Subject
+		var sbj6 svc.Subject
+		var sbj7 svc.Subject
+		var sbj8 svc.Subject
+		var sbj9 svc.Subject
+		var sbj10 svc.Subject
+		var sbj11 svc.Subject
+		var sbj12 svc.Subject
+		var sbj13 svc.Subject
+		var std svc.Userinf
+		//开始查mysql
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 1, int(time.Now().Weekday())+1).First(&sbj1)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 2, int(time.Now().Weekday())+1).First(&sbj2)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 3, int(time.Now().Weekday())+1).First(&sbj3)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 4, int(time.Now().Weekday())+1).First(&sbj4)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 5, int(time.Now().Weekday())+1).First(&sbj5)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 6, int(time.Now().Weekday())+1).First(&sbj6)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 7, int(time.Now().Weekday())+1).First(&sbj7)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 8, int(time.Now().Weekday())+1).First(&sbj8)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 9, int(time.Now().Weekday())+1).First(&sbj9)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 10, int(time.Now().Weekday())+1).First(&sbj10)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 11, int(time.Now().Weekday())+1).First(&sbj11)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 12, int(time.Now().Weekday())+1).First(&sbj12)
+		l.svcCtx.Mysql.Where("class = ? AND th = ? AND weekly = ?", req.Class, 13, int(time.Now().Weekday())+1).First(&sbj13)
+		rcid, errcid := l.svcCtx.Redis.Get("class" + strconv.Itoa(int(req.Class)) + "tomorrowdaycid").Result()
+		if errcid != nil {
+			print("errcid " + errcid.Error())
+		}
+		l.svcCtx.Mysql.Where("class = ? AND cid = ?", req.Class, rcid).First(&std)
+		return &types.Kebiaores{
+			CleanG:    "",
+			Zhiri:     std.Name,
+			Weekly:    "Tomorrow",
+			Lession1:  sbj1.Sbjname,
+			Src1:      sbj1.Src,
+			Lession2:  sbj2.Sbjname,
+			Src2:      sbj2.Src,
+			Lession3:  sbj3.Sbjname,
+			Src3:      sbj3.Src,
+			Lession4:  sbj4.Sbjname,
+			Src4:      sbj4.Src,
+			Lession5:  sbj5.Sbjname,
+			Src5:      sbj5.Src,
+			Lession6:  sbj6.Sbjname,
+			Src6:      sbj6.Src,
+			Lession7:  sbj7.Sbjname,
+			Src7:      sbj7.Src,
+			Lession8:  sbj8.Sbjname,
+			Src8:      sbj8.Src,
+			Lession9:  sbj9.Sbjname,
+			Src9:      sbj9.Src,
+			Lession10: sbj10.Sbjname,
+			Src10:     sbj10.Src,
+			Lession11: sbj11.Sbjname,
+			Src11:     sbj11.Src,
+			Lession12: sbj12.Sbjname,
+			Src12:     sbj12.Src,
+			Lession13: sbj13.Sbjname,
+			Src13:     sbj13.Src,
+		}, nil
+
+	} else {
+		var sbj1 svc.Subject //初始化查询结构体 查明天
 		var sbj2 svc.Subject
 		var sbj3 svc.Subject
 		var sbj4 svc.Subject
@@ -259,9 +335,5 @@ func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores,
 			Lession13: sbj13.Sbjname,
 			Src13:     sbj13.Src,
 		}, nil
-
-	} else {
-
-		return &types.Kebiaores{}, nil
 	}
 }

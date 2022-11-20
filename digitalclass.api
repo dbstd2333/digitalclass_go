@@ -4,6 +4,8 @@ type (
 		Class  int64 `json:"class"`
 	}
 	kebiaores {
+		CleanG    string `json:"cleang"`
+		Zhiri     string `json:"zhiri"`
 		Weekly    string `json:"weekly"`
 		Lession1  string `json:"lession1"`
 		Src1      string `json:"src1"`
@@ -32,6 +34,56 @@ type (
 		Lession13 string `json:"lession13"`
 		Src13     string `json:"src13"`
 	}
+
+	Kebiaocreq {
+		Username string `json:"username"`
+		Cookie   string `json:"cookie"`
+		Slession string `json:"slession"`
+		Clession string `json:"clession"`
+	}
+	kebiaocres {
+		Status string `json:"status"`
+	}
+
+	Zhirichangereq {
+		Username string `json:"username"`
+		Cookie   string `json:"cookie"`
+		Tomorrow string `json:"tomorrow"`
+		Szhiri   string `json:"szhiri"`
+		Czhiri   string `json:"czhiri"`
+	}
+	Zhirichangeres {
+		Status string `json:"status"`
+	}
+
+	Cleanchangereq {
+		Username string `json:"username"`
+		Cookie   string `json:"cookie"`
+		NextWeek string `json:"nextweek"`
+		Sclean   string `json:"sclean"`
+		Cclean   string `json:"cclean"`
+	}
+	Cleanchangeres {
+		Status string `json:"status"`
+	}
+
+	Msgreq {
+		Class int64 `json:"class"`
+	}
+	Msgres {
+		Msg string `json:"msg"`
+	}
+
+	MsgCreq {
+		Username string `json:"username"`
+		Cookie   string `json:"cookie"`
+		Class    int64  `json:"class"`
+		Msg      string `json:"msg"`
+		Type     string `json:"type"`
+	}
+	MsgCres {
+		Status string `json:"status"`
+	}
 )
 
 service digitalclass-api {
@@ -39,5 +91,17 @@ service digitalclass-api {
 	post /api/kebiaoget (Kebiaoreq) returns (kebiaores)
 	
 	@handler kebiaochange
-	post /api/kebiaochange (Kebiaocreq) returns (kebiaocres)
+	post /api/change/kebiao (Kebiaocreq) returns (kebiaocres)
+	
+	@handler Zhirichange
+	post /api/change/zhiri (Zhirichangereq) returns (Zhirichangeres)
+	
+	@handler Cleanchange
+	post /api/change/clean (Cleanchangereq) returns (Cleanchangeres)
+	
+	@handler Msg
+	post /api/msg (Msgreq) returns (Msgres)
+	
+	@handler Msgc
+	post /api/change/msg (MsgCreq) returns (MsgCres)
 }

@@ -7,6 +7,8 @@ type Kebiaoreq struct {
 }
 
 type Kebiaores struct {
+	CleanG    string `json:"cleang"`
+	Zhiri     string `json:"zhiri"`
 	Weekly    string `json:"weekly"`
 	Lession1  string `json:"lession1"`
 	Src1      string `json:"src1"`
@@ -34,4 +36,59 @@ type Kebiaores struct {
 	Src12     string `json:"src12"`
 	Lession13 string `json:"lession13"`
 	Src13     string `json:"src13"`
+}
+
+type Kebiaocreq struct {
+	Username string `json:"username"`
+	Cookie   string `json:"cookie"`
+	Slession string `json:"slession"`
+	Clession string `json:"clession"`
+}
+
+type Kebiaocres struct {
+	Status string `json:"status"`
+}
+
+type Zhirichangereq struct {
+	Username string `json:"username"`
+	Cookie   string `json:"cookie"`
+	Tomorrow string `json:"tomorrow"`
+	Szhiri   string `json:"szhiri"`
+	Czhiri   string `json:"czhiri"`
+}
+
+type Zhirichangeres struct {
+	Status string `json:"status"`
+}
+
+type Cleanchangereq struct {
+	Username string `json:"username"`
+	Cookie   string `json:"cookie"`
+	NextWeek string `json:"nextweek"`
+	Sclean   string `json:"sclean"`
+	Cclean   string `json:"cclean"`
+}
+
+type Cleanchangeres struct {
+	Status string `json:"status"`
+}
+
+type Msgreq struct {
+	Class int64 `json:"class"`
+}
+
+type Msgres struct {
+	Msg string `json:"msg"`
+}
+
+type MsgCreq struct {
+	Username string `json:"username"`
+	Cookie   string `json:"cookie"`
+	Class    int64  `json:"class"`
+	Msg      string `json:"msg"`
+	Type     string `json:"type"`
+}
+
+type MsgCres struct {
+	Status string `json:"status"`
 }

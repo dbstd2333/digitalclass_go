@@ -17,6 +17,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/kebiaoget",
 				Handler: kebiaogetHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/change/kebiao",
+				Handler: kebiaochangeHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/change/zhiri",
+				Handler: ZhirichangeHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/change/clean",
+				Handler: CleanchangeHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/msg",
+				Handler: MsgHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/change/msg",
+				Handler: MsgcHandler(serverCtx),
+			},
 		},
 	)
 }
