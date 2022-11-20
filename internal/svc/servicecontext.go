@@ -58,6 +58,7 @@ type Log struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+
 	dsn := "cloudclass:r6PT86Yyj4jFcZ8i.@tcp(119.23.69.180:3306)/cloudclass?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
 	Mysql, err := gorm.Open(mysql.Open(dsn), &gorm.Config{PrepareStmt: true})
 	sqlDB, err2 := Mysql.DB()
@@ -69,18 +70,24 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		println(err2)
 		fmt.Printf(err2.Error())
 	}
-	sqlDB.SetMaxIdleConns(80)
-	sqlDB.SetMaxOpenConns(195)
+	sqlDB.SetMaxIdleConns(50)
+	sqlDB.SetMaxOpenConns(95)
 	sqlDB.SetConnMaxLifetime(30)
-	Mysql.AutoMigrate(&Userinf{})
-	Mysql.AutoMigrate(&Subject{})
-	Mysql.AutoMigrate(&SeatGroup{})
-	Mysql.AutoMigrate(&Message{})
-	Mysql.AutoMigrate(&Log{})
+	//Mysql.AutoMigrate(&Userinf{})
+	//Mysql.AutoMigrate(&Subject{})
+	//Mysql.AutoMigrate(&SeatGroup{})
+	//Mysql.AutoMigrate(&Message{})
+	//Mysql.AutoMigrate(&Log{})
 	Redis := redis.NewClient(&redis.Options{
 		Addr:     "119.23.69.180:6379",
 		Password: "Qxr7g9hh386.",
+		DB:       0,
 	})
+	_, rerr := Redis.Ping().Result()
+	if rerr != nil {
+		print(rerr.Error())
+	}
+
 	return &ServiceContext{
 		Config: c,
 		Mysql:  Mysql,

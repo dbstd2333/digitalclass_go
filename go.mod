@@ -6,6 +6,7 @@ require github.com/zeromicro/go-zero v1.4.2
 
 require (
 	github.com/go-redis/redis v6.15.9+incompatible // indirect
+	github.com/go-redis/redis/v9 v9.0.0-rc.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
@@ -48,7 +49,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.11.0 // indirect
 	go.opentelemetry.io/proto/otlp v0.19.0 // indirect
 	go.uber.org/automaxprocs v1.5.1 // indirect
-	golang.org/x/net v0.0.0-20220531201128-c960675eff93 // indirect
+	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
 	golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20220602131408-e326c6e8e9c8 // indirect
