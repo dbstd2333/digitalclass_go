@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func CleanchangeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func teacherchangeseatHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.Cleanchangereq
+		var req types.TeacherchangeSeatreq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := logic.NewCleanchangeLogic(r.Context(), svcCtx)
-		resp, err := l.Cleanchange(&req)
+		l := logic.NewTeacherchangeseatLogic(r.Context(), svcCtx)
+		resp, err := l.Teacherchangeseat(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

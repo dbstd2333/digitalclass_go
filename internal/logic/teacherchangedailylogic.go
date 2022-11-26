@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type KebiaochangeLogic struct {
+type TeacherchangedailyLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewKebiaochangeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KebiaochangeLogic {
-	return &KebiaochangeLogic{
+func NewTeacherchangedailyLogic(ctx context.Context, svcCtx *svc.ServiceContext) *TeacherchangedailyLogic {
+	return &TeacherchangedailyLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *KebiaochangeLogic) Kebiaochange(req *types.Kebiaocreq) (resp *types.Kebiaocres, err error) {
+func (l *TeacherchangedailyLogic) Teacherchangedaily(req *types.TeacherchangeDailyreq) (resp *types.TeacherchangeDailyres, err error) {
 	// todo: add your logic here and delete this line
 
 	return

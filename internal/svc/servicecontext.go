@@ -73,11 +73,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	sqlDB.SetMaxIdleConns(50)
 	sqlDB.SetMaxOpenConns(95)
 	sqlDB.SetConnMaxLifetime(30)
-	//Mysql.AutoMigrate(&Userinf{})
-	//Mysql.AutoMigrate(&Subject{})
-	//Mysql.AutoMigrate(&SeatGroup{})
-	//Mysql.AutoMigrate(&Message{})
-	//Mysql.AutoMigrate(&Log{})
+	Mysql.AutoMigrate(&Userinf{})
+	Mysql.AutoMigrate(&Subject{})
+	Mysql.AutoMigrate(&SeatGroup{})
+	Mysql.AutoMigrate(&Message{})
+	Mysql.AutoMigrate(&Log{})
 	Redis := redis.NewClient(&redis.Options{
 		Addr:     "119.23.69.180:6379",
 		Password: "Qxr7g9hh386.",

@@ -12,11 +12,12 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type KebiaogetLogic struct {
+type ClassgetsubjectLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
+
 type KebiaoJson struct {
 	CleanG    string `json:"cleang"`
 	Zhiri     string `json:"zhiri"`
@@ -50,16 +51,15 @@ type KebiaoJson struct {
 	Src13     string `json:"src13"`
 }
 
-func NewKebiaogetLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KebiaogetLogic {
-	return &KebiaogetLogic{
+func NewClassgetsubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ClassgetsubjectLogic {
+	return &ClassgetsubjectLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *KebiaogetLogic) Kebiaoget(req *types.Kebiaoreq) (resp *types.Kebiaores, err error) {
-
+func (l *ClassgetsubjectLogic) Classgetsubject(req *types.Kebiaoreq) (resp *types.Kebiaores, err error) {
 	if req.Weekly == 0 {
 
 		qkey := "class" + strconv.Itoa(int(req.Class)) + "subject"

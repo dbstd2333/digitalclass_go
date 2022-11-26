@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func MsgHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func classgetdailyHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.Msgreq
+		var req types.ClassDailyreq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := logic.NewMsgLogic(r.Context(), svcCtx)
-		resp, err := l.Msg(&req)
+		l := logic.NewClassgetdailyLogic(r.Context(), svcCtx)
+		resp, err := l.Classgetdaily(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

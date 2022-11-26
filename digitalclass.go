@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	//"time"
 
 	"cloudclass_go/internal/config"
 	"cloudclass_go/internal/handler"
@@ -26,6 +25,8 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
+
+	//socket长连接初始化
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	//fmt.Print(int(time.Now().Weekday()))

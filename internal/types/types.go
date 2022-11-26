@@ -38,57 +38,388 @@ type Kebiaores struct {
 	Src13     string `json:"src13"`
 }
 
-type Kebiaocreq struct {
+type Classloginreq struct {
 	Username string `json:"username"`
+	Passwd   string `json:"passwd"`
+}
+
+type Classloginres struct {
+	Status   string `json:"status"`
 	Cookie   string `json:"cookie"`
-	Slession string `json:"slession"`
-	Clession string `json:"clession"`
-}
-
-type Kebiaocres struct {
-	Status string `json:"status"`
-}
-
-type Zhirichangereq struct {
 	Username string `json:"username"`
+}
+
+type ClassMsgreq struct {
 	Cookie   string `json:"cookie"`
-	Tomorrow string `json:"tomorrow"`
-	Szhiri   string `json:"szhiri"`
-	Czhiri   string `json:"czhiri"`
-}
-
-type Zhirichangeres struct {
-	Status string `json:"status"`
-}
-
-type Cleanchangereq struct {
 	Username string `json:"username"`
-	Cookie   string `json:"cookie"`
-	NextWeek string `json:"nextweek"`
-	Sclean   string `json:"sclean"`
-	Cclean   string `json:"cclean"`
-}
-
-type Cleanchangeres struct {
-	Status string `json:"status"`
-}
-
-type Msgreq struct {
-	Class int64 `json:"class"`
-}
-
-type Msgres struct {
-	Msg string `json:"msg"`
-}
-
-type MsgCreq struct {
-	Username string `json:"username"`
-	Cookie   string `json:"cookie"`
 	Class    int64  `json:"class"`
-	Msg      string `json:"msg"`
-	Type     string `json:"type"`
 }
 
-type MsgCres struct {
+type ClassMsgres struct {
+	Title   string `json:"title"`
+	Msg     string `json:"msg"`
+	Time    string `json:"time"`
+	Sender  string `json:"sender"`
+	MsgType string `json:"msgtype"`
+}
+
+type ClassSeatreq struct {
+	Class    int64  `json:"class"`
+	Time     string `json:"time"`
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+}
+
+type ClassSeatres struct {
+	S11name   string `json:"s11name"`
+	S12name   string `json:"s12name"`
+	S13name   string `json:"s13name"`
+	S14name   string `json:"s14name"`
+	S15name   string `json:"s15name"`
+	S21name   string `json:"s21name"`
+	S22name   string `json:"s22name"`
+	S23name   string `json:"s23name"`
+	S24name   string `json:"s24name"`
+	S25name   string `json:"s25name"`
+	S31name   string `json:"s31name"`
+	S32name   string `json:"s32name"`
+	S33name   string `json:"s33name"`
+	S34name   string `json:"s34name"`
+	S35name   string `json:"s35name"`
+	S41name   string `json:"s41name"`
+	S42name   string `json:"s42name"`
+	S43name   string `json:"s43name"`
+	S44name   string `json:"s44name"`
+	S45name   string `json:"s45name"`
+	S51name   string `json:"s51name"`
+	S52name   string `json:"s52name"`
+	S53name   string `json:"s53name"`
+	S54name   string `json:"s54name"`
+	S55name   string `json:"s55name"`
+	S61name   string `json:"s61name"`
+	S62name   string `json:"s62name"`
+	S63name   string `json:"s63name"`
+	S64name   string `json:"s64name"`
+	S65name   string `json:"s65name"`
+	S71name   string `json:"s71name"`
+	S72name   string `json:"s72name"`
+	S73name   string `json:"s73name"`
+	S74name   string `json:"s74name"`
+	S75name   string `json:"s75name"`
+	S81name   string `json:"s81name"`
+	S82name   string `json:"s82name"`
+	S83name   string `json:"s83name"`
+	S84name   string `json:"s84name"`
+	S85name   string `json:"s85name"`
+	S11status string `json:"s11status"`
+	S12status string `json:"s12status"`
+	S13status string `json:"s13status"`
+	S14status string `json:"s14status"`
+	S15status string `json:"s15status"`
+	S21status string `json:"s21status"`
+	S22status string `json:"s22status"`
+	S23status string `json:"s23status"`
+	S24status string `json:"s24status"`
+	S25status string `json:"s25status"`
+	S31status string `json:"s31status"`
+	S32status string `json:"s32status"`
+	S33status string `json:"s33status"`
+	S34status string `json:"s34status"`
+	S35status string `json:"s35status"`
+	S41status string `json:"s41status"`
+	S42status string `json:"s42status"`
+	S43status string `json:"s43status"`
+	S44status string `json:"s44status"`
+	S45status string `json:"s45status"`
+	S51status string `json:"s51status"`
+	S52status string `json:"s52status"`
+	S53status string `json:"s53status"`
+	S54status string `json:"s54status"`
+	S55status string `json:"s55status"`
+	S61status string `json:"s61status"`
+	S62status string `json:"s62status"`
+	S63status string `json:"s63status"`
+	S64status string `json:"s64status"`
+	S65status string `json:"s65status"`
+	S71status string `json:"s71status"`
+	S72status string `json:"s72status"`
+	S73status string `json:"s73status"`
+	S74status string `json:"s74status"`
+	S75status string `json:"s75status"`
+	S81status string `json:"s81status"`
+	S82status string `json:"s82status"`
+	S83status string `json:"s83status"`
+	S84status string `json:"s84status"`
+	S85status string `json:"s85status"`
+}
+
+type ClassGroupreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+	Time     string `json:"time"`
+}
+
+type ClassGroupres struct {
+	G1p1name string `json:"g1p1name"`
+	G1p2name string `json:"g1p2name"`
+	G1p3name string `json:"g1p3name"`
+	G1p4name string `json:"g1p4name"`
+	G1p5name string `json:"g1p5name"`
+	G2p1name string `json:"g2p1name"`
+	G2p2name string `json:"g2p2name"`
+	G2p3name string `json:"g2p3name"`
+	G2p4name string `json:"g2p4name"`
+	G2p5name string `json:"g2p5name"`
+	G3p1name string `json:"g3p1name"`
+	G3p2name string `json:"g3p2name"`
+	G3p3name string `json:"g3p3name"`
+	G3p4name string `json:"g3p4name"`
+	G3p5name string `json:"g3p5name"`
+	G4p1name string `json:"g4p1name"`
+	G4p2name string `json:"g4p2name"`
+	G4p3name string `json:"g4p3name"`
+	G4p4name string `json:"g4p4name"`
+	G4p5name string `json:"g4p5name"`
+	G5p1name string `json:"g5p1name"`
+	G5p2name string `json:"g5p2name"`
+	G5p3name string `json:"g5p3name"`
+	G5p4name string `json:"g5p4name"`
+	G5p5name string `json:"g5p5name"`
+}
+
+type ClassDailyreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+}
+
+type ClassDailyres struct {
+	CleanG string `json:"cleang"`
+	Zhiri  string `json:"zhiri"`
+}
+
+type ClassupReadreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+}
+
+type ClassupReadres struct {
 	Status string `json:"status"`
+}
+
+type ClassPhonereq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+}
+
+type ClassPhoneres struct {
+	S1name     string `json:"s1name"`
+	S2name     string `json:"s2name"`
+	S3name     string `json:"s3name"`
+	S4name     string `json:"s4name"`
+	S5name     string `json:"s5name"`
+	S6name     string `json:"s6name"`
+	S7name     string `json:"s7name"`
+	S8name     string `json:"s8name"`
+	S9name     string `json:"s9name"`
+	S10name    string `json:"s10name"`
+	S11name    string `json:"s11name"`
+	S12name    string `json:"s12name"`
+	S13name    string `json:"s13name"`
+	S14name    string `json:"s14name"`
+	S15name    string `json:"s15name"`
+	S16name    string `json:"s16name"`
+	S17name    string `json:"s17name"`
+	S18name    string `json:"s18name"`
+	S19name    string `json:"s19name"`
+	S20name    string `json:"s20name"`
+	S21name    string `json:"s21name"`
+	S22name    string `json:"s22name"`
+	S23name    string `json:"s23name"`
+	S24name    string `json:"s24name"`
+	S25name    string `json:"s25name"`
+	S26name    string `json:"s26name"`
+	S27name    string `json:"s27name"`
+	S28name    string `json:"s28name"`
+	S29name    string `json:"s29name"`
+	S30name    string `json:"s30name"`
+	S31name    string `json:"s31name"`
+	S32name    string `json:"s32name"`
+	S33name    string `json:"s33name"`
+	S34name    string `json:"s34name"`
+	S35name    string `json:"s35name"`
+	S36name    string `json:"s36name"`
+	S37name    string `json:"s37name"`
+	S38name    string `json:"s38name"`
+	S39name    string `json:"s39name"`
+	S40name    string `json:"s40name"`
+	S1pstatus  string `json:"s1pstatus"`
+	S2pstatus  string `json:"s2pstatus"`
+	S3pstatus  string `json:"s3pstatus"`
+	S4pstatus  string `json:"s4pstatus"`
+	S5pstatus  string `json:"s5pstatus"`
+	S6pstatus  string `json:"s6pstatus"`
+	S7pstatus  string `json:"s7pstatus"`
+	S8pstatus  string `json:"s8pstatus"`
+	S9pstatus  string `json:"s9pstatus"`
+	S10pstatus string `json:"s10pstatus"`
+	S11pstatus string `json:"s11pstatus"`
+	S12pstatus string `json:"s12pstatus"`
+	S13pstatus string `json:"s13pstatus"`
+	S14pstatus string `json:"s14pstatus"`
+	S15pstatus string `json:"s15pstatus"`
+	S16pstatus string `json:"s16pstatus"`
+	S17pstatus string `json:"s17pstatus"`
+	S18pstatus string `json:"s18pstatus"`
+	S19pstatus string `json:"s19pstatus"`
+	S20pstatus string `json:"s20pstatus"`
+	S21pstatus string `json:"s21pstatus"`
+	S22pstatus string `json:"s22pstatus"`
+	S23pstatus string `json:"s23pstatus"`
+	S24pstatus string `json:"s24pstatus"`
+	S25pstatus string `json:"s25pstatus"`
+	S26pstatus string `json:"s26pstatus"`
+	S27pstatus string `json:"s27pstatus"`
+	S28pstatus string `json:"s28pstatus"`
+	S29pstatus string `json:"s29pstatus"`
+	S30pstatus string `json:"s30pstatus"`
+	S31pstatus string `json:"s31pstatus"`
+	S32pstatus string `json:"s32pstatus"`
+	S33pstatus string `json:"s33pstatus"`
+	S34pstatus string `json:"s34pstatus"`
+	S35pstatus string `json:"s35pstatus"`
+	S36pstatus string `json:"s36pstatus"`
+	S37pstatus string `json:"s37pstatus"`
+	S38pstatus string `json:"s38pstatus"`
+	S39pstatus string `json:"s39pstatus"`
+	S40pstatus string `json:"s40pstatus"`
+}
+
+type StudentLoginreq struct {
+	Username string `json:"username"`
+	Passwd   string `json:"passwd"`
+	Class    int64  `json:"class"`
+}
+
+type StudentLoginres struct {
+	Status   string `json:"status"`
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+}
+
+type StudentchangeGroupreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+	Group    int64  `json:"group"`
+}
+
+type StudentchangeGroupres struct {
+	Status string `json:"status"`
+}
+
+type StudentchangeSeatreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+	Seat     string `json:"seat"`
+}
+
+type StudentchangeSeatres struct {
+	Status string `json:"status"`
+}
+
+type StudentupPhonereq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+}
+
+type StudentupPhoneres struct {
+	Status string `json:"status"`
+}
+
+type TeacherLoginreq struct {
+	Username string `json:"username"`
+	Passwd   string `json:"passwd"`
+}
+
+type TeacherLoginres struct {
+	Status   string `json:"status"`
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+}
+
+type TeacherchangeSubjectreq struct {
+	Cookie     string `json:"cookie"`
+	Username   string `json:"username"`
+	Class      int64  `json:"class"`
+	Weekday    int64  `json:"weekday"`
+	SubjectNum int64  `json:"subjectnum"`
+	Subname    string `json:"subname"`
+}
+
+type TeacherchangeSubjectres struct {
+	Status string `json:"status"`
+}
+
+type TeacherchangeSeatreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+	Seat     string `json:"seat"`
+	Seatname string `json:"seatname"`
+}
+
+type TeacherchangeSeatres struct {
+	Status string `json:"status"`
+}
+
+type TeacherchangeGroupreq struct {
+	Cookie        string `json:"cookie"`
+	Username      string `json:"username"`
+	Class         int64  `json:"class"`
+	SGroupstdname string `json:"sgroupstd"`
+	CGroupstdname string `json:"cgroupstd"`
+}
+
+type TeacherchangeGroupres struct {
+	Status string `json:"status"`
+}
+
+type TeacherchangeDailyreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+	CleanG   string `json:"cleang"`
+	Zhiri    string `json:"zhiri"`
+}
+
+type TeacherchangeDailyres struct {
+	Status string `json:"status"`
+}
+
+type TeacherupMsgreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+	Class    int64  `json:"class"`
+	Title    string `json:"title"`
+	Msg      string `json:"msg"`
+	MsgType  string `json:"msgtype"`
+}
+
+type TeacherupMsgres struct {
+	Status string `json:"status"`
+}
+
+type TeachergetReadclassreq struct {
+	Cookie   string `json:"cookie"`
+	Username string `json:"username"`
+}
+
+type TeachergetReadclassres struct {
+	Readclass string `json:"readclass"`
 }

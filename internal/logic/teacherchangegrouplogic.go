@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type MsgLogic struct {
+type TeacherchangegroupLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewMsgLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MsgLogic {
-	return &MsgLogic{
+func NewTeacherchangegroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *TeacherchangegroupLogic {
+	return &TeacherchangegroupLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *MsgLogic) Msg(req *types.Msgreq) (resp *types.Msgres, err error) {
+func (l *TeacherchangegroupLogic) Teacherchangegroup(req *types.TeacherchangeGroupreq) (resp *types.TeacherchangeGroupres, err error) {
 	// todo: add your logic here and delete this line
 
 	return

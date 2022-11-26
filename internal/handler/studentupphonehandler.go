@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func kebiaogetHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func studentupphoneHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.Kebiaoreq
+		var req types.StudentupPhonereq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := logic.NewKebiaogetLogic(r.Context(), svcCtx)
-		resp, err := l.Kebiaoget(&req)
+		l := logic.NewStudentupphoneLogic(r.Context(), svcCtx)
+		resp, err := l.Studentupphone(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
